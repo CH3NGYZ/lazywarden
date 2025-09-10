@@ -18,7 +18,7 @@ RUN export VER=$(curl -H "Accept: application/vnd.github+json" https://api.githu
 # Copy the necessary files into the container
 COPY requirements.txt /app/requirements.txt
 COPY .env /app/.env
-COPY config/bitwarden-drive-backup-google.json /root/lazywarden/config/bitwarden-drive-backup-google.json
+COPY config/google-oauth.json /root/lazywarden/config/google-oauth.json
 
 # Copy the application files to the container
 COPY app/ /app/app/

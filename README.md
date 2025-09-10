@@ -23,7 +23,6 @@ Lazywarden is a Python automation tool designed to Backup and Restore data from 
 
 ## <span style="display: inline-flex; align-items: center;"><img src="https://media.tenor.com/-AyTtMgs2mMAAAAi/nyan-cat-nyan.gif" width="60" style="vertical-align: middle; margin-right: 10px;"> Platform Compatibility</span>
 
-
 <div style="display: flex; justify-content: space-around;">
     <a href="https://imgur.com/Xz2k5O8"><img src="https://i.imgur.com/Xz2k5O8.png" title="source: imgur.com" width="30"/></a>
     <a href="https://imgur.com/9oZa9uU"><img src="https://imgur.com/9oZa9uU.png" title="source: imgur.com" width="30"/></a>
@@ -48,31 +47,31 @@ Lazywarden is a Python automation tool designed to Backup and Restore data from 
 
 ## <span style="display: inline-flex; align-items: center;"><img src="https://user-images.githubusercontent.com/74038190/212257472-08e52665-c503-4bd9-aa20-f5a4dae769b5.gif" width="36" style="vertical-align: middle; margin-right: 10px;"> Demo Backup</span>
 
-
 <img src="https://raw.githubusercontent.com/querylab/svg/main/lazy-oficial.gif" />
 
 <img src="https://raw.githubusercontent.com/querylab/svg/main/lazy-video.gif" />
 
-
 ## <span style="display: inline-flex; align-items: center;"> <img src="https://raw.githubusercontent.com/querylab/svg/main/server2.gif" width="50" style="vertical-align: middle; margin-right: 10px;"> <img src="https://raw.githubusercontent.com/querylab/svg/main/process2.gif" width="50" style="vertical-align: middle; margin-right: 15px;"> System Requirements </span>
+
 - **Operating System**: Compatible with major Linux distributions
 
-	- ✅ Ubuntu
-	- ✅ Debian
+  - ✅ Ubuntu
+  - ✅ Debian
 
 ## <span style="display: inline-flex; align-items: center;"><img src="https://github.com/Anmol-Baranwal/Cool-GIFs-For-GitHub/assets/74038190/2c0eef4b-7b75-42bd-9722-4bea97a2d532" width="60" style="vertical-align: middle; margin-right: 15px;">Installation</span>
-###  Clone the repository
 
- ``` BASH
-    git clone https://github.com/querylab/lazywarden.git
-    cd lazywarden
+### Clone the repository
+
+```BASH
+   git clone https://github.com/querylab/lazywarden.git
+   cd lazywarden
 ```
 
 ### Configure Environment Variables & Bitwarden Secrets Manager
 
 - Create a `.env` file based on the on this `.env.sample` example file and fill in the necessary variables.
 
-``` BASH
+```BASH
 #---------------------------------------------------------------------------------------
 # These are the 6 variables that are mandatory requirements for Bitwarden Secret Manager
 BW_URL=f22bba66-e55d-1111-9a93-abf0dfad069e
@@ -145,7 +144,7 @@ B2_APP_KEY_ID=
 B2_APP_KEY=
 
 # Google Drive Settings
-GOOGLE_SERVICE_ACCOUNT_FILE=/root/lazywarden/config/bitwarden-drive-backup-google.json
+GOOGLE_OAUTH_FILE=/root/lazywarden/config/google-oauth.json
 GOOGLE_FOLDER_ID=
 
 # Backup Settings
@@ -154,7 +153,7 @@ CRON_SCHEDULE="0 0 23 * *"
 TIMEZONE=America/New_York
 TIMESTAMP=2024_10_31_13_03_29
 
-  
+
 # API URLs for Bitwarden
 API_URL=https://vault.bitwarden.com/api
 IDENTITY_URL=https://vault.bitwarden.com/identity
@@ -184,13 +183,12 @@ SENDER_EMAIL=
 ### <img src="https://raw.githubusercontent.com/querylab/svg/main/ubuntu.gif" width="20" style="vertical-align: middle;"> Ubuntu Configuration
 
 - Run the script to install all system dependencies and requirements
- 
-``` BASH
+
+```BASH
 cd lazywarden/scripts
 chmod +x setup-ubuntu-env.sh
 ./setup-ubuntu-env.sh
 ```
-
 
 - Run this script to automatically install Docker & Docker-Compose:
 
@@ -201,42 +199,39 @@ chmod +x docker-ubuntu.sh
 
 - First, ensure you are in the root directory of the project `lazywarden/`:
 
-``` BASH
-cd .. 
+```BASH
+cd ..
 source venv/bin/activate
 ```
 
 - Now Install Bitwarden CLI using the `bitwarden-cli-install.py` script, which will install all CLI dependencies:
 
-``` PYTHON
+```PYTHON
 python3 scripts/bitwarden-cli-install.py
 ```
 
-
 - Change the system timezone using the following command. Replace `Region/City` with the desired timezone (e.g., `America/New_York`):
 
-``` BASH
+```BASH
 timedatectl set-timezone Region/City
 ```
 
-
 - For example, to set the timezone to `America/New_York`, you would run:
 
-``` BASH
+```BASH
 timedatectl set-timezone America/New_York
 ```
 
-
 - Run the Lazywarden program. Navigate to the `app/` folder and execute `main.py`:
 
-``` PYTHON
+```PYTHON
 cd app
 python3 main.py
 ```
 
 - In Ubuntu, if you encounter an error when running `main.py`, it may be related to missing or outdated libraries. To fix this, I recommend running the following command to install all the necessary dependencies:
 
-``` PYTHON
+```PYTHON
  pip install -r requirements.txt
 ```
 
@@ -244,9 +239,9 @@ python3 main.py
 
 ### <img src="https://raw.githubusercontent.com/querylab/svg/main/debian.png" width="20" style="vertical-align: middle;"> Debian Configuration
 
- - Run the script to install all system dependencies and requirements:
- 
-``` BASH
+- Run the script to install all system dependencies and requirements:
+
+```BASH
 cd lazywarden/scripts
 chmod +x setup-debian-env.sh
 ./setup-debian-env.sh
@@ -261,48 +256,45 @@ chmod +x docker-debian.sh
 
 - First, ensure you are in the root directory of the project `lazywarden/`:
 
-``` BASH
-cd .. 
+```BASH
+cd ..
 source venv/bin/activate
 ```
 
 - Install Bitwarden CLI using the `bitwarden-cli-install.py` script, which will install all CLI dependencies:
 
-``` PYTHON
+```PYTHON
 python3 scripts/bitwarden-cli-install.py
 ```
 
 - Change the system timezone using the following command. Replace `Region/City` with the desired timezone (e.g., `America/New_York`):
 
-``` BASH
+```BASH
 timedatectl set-timezone Region/City
 ```
 
-
 - For example, to set the timezone to `America/New_York`, you would run:
 
-``` BASH
+```BASH
 timedatectl set-timezone America/New_York
 ```
 
-
 - Run the Lazywarden program. Navigate to the `app/` folder and execute `main.py`:
 
-``` PYTHON
+```PYTHON
 cd app
 python3 main.py
 ```
 
 - In Debian, if you encounter an error when running `main.py`, it may be related to missing or outdated libraries. To fix this, I recommend running the following command to install all the necessary dependencies:
 
-``` PYTHON
+```PYTHON
  pip install -r requirements.txt
 ```
 
+### <img src="https://raw.githubusercontent.com/querylab/svg/main/tree2.gif" width="30" style="vertical-align: middle;">Tree Structure
 
-### <img src="https://raw.githubusercontent.com/querylab/svg/main/tree2.gif" width="30" style="vertical-align: middle;">Tree Structure 
-
-``` PYTHON
+```PYTHON
 
 lazywarden/
 ├── app/                           # This directory to contain the main application code
@@ -314,17 +306,17 @@ lazywarden/
 │   ├── notifications.py           # Handles notifications
 │   ├── secrets_manager.py         # Manages secrets
 │   ├── import_to_bitwarden.py     # Import your bitwarden vault
-│   ├── import_to_keepass.py       # Create kdbx database 
+│   ├── import_to_keepass.py       # Create kdbx database
 │   ├── schedule_backup.py         # For create Schedule Backup
 ├── config/                        # Directory for configuration files
-│   ├── bitwarden-drive-backup-google.json # Configuration for Google Drive
+│   ├── google-oauth.json # Configuration for Google Drive
 ├── scripts/                       # Directory for installation and setup scripts
 │   ├── bitwarden-cli-install.py   # Script to install the Bitwarden CLI
 │   ├── docker-debian.sh           # Setup script for Debian with Docker
 │   ├── docker-ubuntu.sh           # Setup script for Ubuntu with Docker
 │   ├── setup-debian-env.sh        # Environment setup for Debian
 │   ├── setup-ubuntu-env.sh        # Environment setup for Ubuntu
-│   ├── alldecrypt-zip.py          # Decrypt all zip files 
+│   ├── alldecrypt-zip.py          # Decrypt all zip files
 │   ├── json-only-decrypt.py       # Decrypt only json files (optional)
 ├── backup-drive/
 │   ├── (This is where the generated backups will be stored local)
@@ -337,19 +329,16 @@ lazywarden/
 
 ```
 
-
-
-
 ### <img src="https://raw.githubusercontent.com/querylab/svg/main/whale1.gif" width="30" style="vertical-align: middle;"> Docker Compose
 
 The Docker container will run the `main.py` script every 24 hours to back up Bitwarden and upload it to the configured cloud services. Notifications will be sent to the specified services in case of success or failure. You can modify the backup frequency according to your needs, such as monthly, daily, or hourly.
 
-``` YAML
+```YAML
 services:
   lazywarden:
     container_name: lazywarden
     hostname: lazywarden
-    image: querylab/lazywarden:latest
+    image: ch3ngyz/lazywarden:latest
     env_file:
       - .env
     environment:
@@ -377,10 +366,9 @@ docker compose up -d
 
 - The `docker-compose.yml` file defines the lazywarden service and sets up environment variables and volumes for persistent storage.
 
-### <img src="https://raw.githubusercontent.com/querylab/svg/main/alert1.gif" width="30" style="vertical-align: middle;"><img src="https://raw.githubusercontent.com/querylab/svg/main/cloud1.gif" width="30" style="vertical-align: middle;"><img src="https://raw.githubusercontent.com/querylab/svg/main/process2.gif" width="30" style="vertical-align: middle;"> Security Recommendation: Run in Local Environment 
+### <img src="https://raw.githubusercontent.com/querylab/svg/main/alert1.gif" width="30" style="vertical-align: middle;"><img src="https://raw.githubusercontent.com/querylab/svg/main/cloud1.gif" width="30" style="vertical-align: middle;"><img src="https://raw.githubusercontent.com/querylab/svg/main/process2.gif" width="30" style="vertical-align: middle;"> Security Recommendation: Run in Local Environment
 
 - For security, run this project only in a local environment within your personal network. This significantly reduces the risk of exposure to external attacks, ensuring that sensitive data and credentials remain protected within a controlled environment.
-
 
 ### 📢 Warning
 
@@ -396,15 +384,11 @@ docker compose up -d
 - If you switch Bitwarden Accounts, make sure to run the `bw logout` command before logging into a new account.
 - I run the program using the root user.
 
-
-
-
 ### <span style="display: inline-flex; align-items: center;"> <img src="https://user-images.githubusercontent.com/74038190/216122069-5b8169d7-1d8e-4a13-b245-a8e4176c99f8.png" width="30" style="vertical-align: middle; margin-right: 10px;"> Motivations </span>
 
 - I created Lazywarden to Automate Bitwarden Backups without manual effort or exposing sensitive data. After struggling with complex tools, I leveraged Bitwarden Secret Manager to securely manage secrets. Lazywarden automates backups and uploads them to multiple cloud services (Google Drive, Dropbox, pCloud, MEGA, Seafile, Nextcloud, Filebase, Storj, Cloudflare R2, Backblaze B2), and integrates with Telegram, Discord, Ntfy, Slack, Todoist, Vikunja, and CalDAV for notifications and tracking. Its standout feature is the ability to restore encrypted backups back into Bitwarden, making backup management simple, secure, and efficient.
 
 - If you like this project, please consider giving it a ⭐
-
 
 <div align="center">
   <a href="https://imgur.com/k4VWmn7">
@@ -412,5 +396,107 @@ docker compose up -d
   </a>
 </div>
 
+# Google Drive OAuth 2.0 Setup Guide
 
+## 1️⃣ Create a Google Cloud Project
 
+1. Go to [Google Cloud Console](https://console.cloud.google.com/).
+2. Click the **Project** dropdown at the top → **[New Project](https://console.cloud.google.com/projectcreate)**.
+3. Enter a **Project Name**, e.g. `lazywarden`.
+4. Optionally select a **Billing Account** and **Location**.
+5. Click **Create**.
+6. Wait until the project is created and select it.
+
+## 2️⃣ Enable Google Drive API
+
+1. Navigate to [Google Drive API](https://console.cloud.google.com/apis/library/drive.googleapis.com).
+2. Click **Enable**.
+
+## 3️⃣ Add Test Users
+
+1. Go to [OAuth Consent Screen](https://console.cloud.google.com/auth/overview) → [Audience](https://console.cloud.google.com/auth/audience) → Test Users
+2. Click **Add Users**.
+3. Input your Google account email address.
+4. Save.
+
+## 4️⃣ Create an OAuth Client ID
+
+1. Navigate to [Credentials](https://console.cloud.google.com/apis/credentials).
+2. Click **Create Credentials → OAuth Client ID**.
+   - Application type: **Web application**.
+   - Name: choose any name.
+   - Authorized redirect URIs: add `https://developers.google.com/oauthplayground`.
+3. Click **Create**.
+4. Copy and save your **`client_id`** and **`client_secret`**.
+
+## 5️⃣ Use OAuth Playground
+
+1. Open [OAuth Playground](https://developers.google.com/oauthplayground/).
+2. Click ⚙️ settings (top-right).
+   - Check **Use your own OAuth credentials**.
+   - Paste your `client_id` and `client_secret`.
+   - Close settings.
+3. In Step 1, enter the scope: `https://www.googleapis.com/auth/drive`.
+4. Click **Authorize APIs**.
+   - Log in with your Google account and click **Continue**.
+5. In Step 2, click **Exchange authorization code for tokens**.
+   - Copy the **`refresh_token`**.
+
+## 6️⃣ Manually Create `google-drive-oauth-token.json`
+
+Create a file named `google-drive-oauth-token.json` with the following content:
+
+```json
+{
+  "client_id": "<client_id>",
+  "client_secret": "<client_secret>",
+  "refresh_token": "<refresh_token>",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "scopes": ["https://www.googleapis.com/auth/drive"]
+}
+```
+
+## 7️⃣ Create Google Drive Folder and Copy Folder ID
+
+1. Go to [Google Drive](https://drive.google.com/drive/my-drive).
+2. Create a new folder and name it `Lazywarden-Backup`.
+3. Copy the part of the URL after `folders/` as `folder_id`.
+
+---
+
+## 8️⃣ Save JSON Path and Folder ID to `.env`
+
+1. Make sure you have the `google-drive-oauth-token.json` file generated in the previous steps.
+2. Open (or create) the `.env` file.
+3. Locate the following lines (or add them if they don't exist) and replace the placeholders with your own paths/IDs:
+
+```
+# Google Drive Settings
+GOOGLE_OAUTH_FILE=/path/to/google-drive-oauth-token.json
+GOOGLE_FOLDER_ID=<folder_id>
+```
+
+---
+
+## 7️⃣ Common Errors
+
+| Error                 | Cause                                                                     | Fix                               |
+| --------------------- | ------------------------------------------------------------------------- | --------------------------------- |
+| redirect_uri_mismatch | `https://developers.google.com/oauthplayground` not added in OAuth client | Add it to redirect URIs           |
+| access_denied         | Account not added as **test user**                                        | Add user in OAuth consent screen  |
+| invalid_grant         | Refresh token expired/revoked                                             | Generate a new one via Playground |
+
+# Use the Modified Container for Google Drive OAuth
+
+This image supports **amd64** and **arm64** architectures,  
+and adds **Google OAuth 2.0** support.
+
+```bash
+ch3ngyz/lazywarden:latest
+```
+
+or
+
+```bash
+ghcr.io/ch3ngyz/lazywarden:latest
+```

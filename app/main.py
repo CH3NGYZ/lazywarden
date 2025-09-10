@@ -1,5 +1,6 @@
 from imports import logging, time, boto3
 from config import load_environment_variables, configure_logging
+from google.auth.transport.requests import Request
 from bitwarden_client import setup_bitwarden_client, authenticate_bitwarden_client, unlock_vault, is_vault_unlocked, check_server_configured, configure_server, logout_bitwarden
 from secrets_manager import retrieve_secrets
 from backup import backup_bitwarden
@@ -168,15 +169,24 @@ def main():
 
     logging.info("Environment variables and secrets loaded successfully.")
 
-    # Configure Google Drive
+    # Configure Google Drive with personal OAuth 2.0
     try:
-        if env_vars["GOOGLE_SERVICE_ACCOUNT_FILE"] and env_vars["GOOGLE_FOLDER_ID"]:
-            from google.oauth2 import service_account
+        if env_vars["GOOGLE_OAUTH_FILE"] and env_vars["GOOGLE_FOLDER_ID"]:
+            from google.oauth2.credentials import Credentials
             from googleapiclient.discovery import build
-            SCOPES = ['https://www.googleapis.com/auth/drive']
-            credentials = service_account.Credentials.from_service_account_file(env_vars["GOOGLE_SERVICE_ACCOUNT_FILE"], scopes=SCOPES)
-            drive_service = build('drive', 'v3', credentials=credentials, cache_discovery=False)
-            logging.info("Google Drive configured successfully")
+            import os
+            import json
+            token_file = env_vars["GOOGLE_OAUTH_FILE"]
+            if not token_file or not os.path.exists(token_file):
+                logging.warning(f"Token file not found: {token_file}")
+                raise FileNotFoundError(f"Token file not found: {token_file}")
+            token_file_json = json.load(open(token_file, "r", encoding="utf-8"))
+            SCOPES = token_file_json.get("scopes", ["https://www.googleapis.com/auth/drive"])
+            creds = Credentials.from_authorized_user_file(token_file, SCOPES)
+            if creds.expired and creds.refresh_token:
+                creds.refresh(Request())
+            drive_service = build("drive", "v3", credentials=creds, cache_discovery=False)
+            logging.info("Google Drive (OAuth 2.0) configured successfully")
         else:
             drive_service = None
             logging.warning("Google Drive is not configured. Uploads to Google Drive will be skipped.")
