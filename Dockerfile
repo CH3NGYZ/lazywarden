@@ -22,13 +22,21 @@ COPY config/google-oauth.json /root/lazywarden/config/google-oauth.json
 
 # Copy the application files to the container
 COPY app/ /app/app/
+COPY scripts/ /app/scripts/
 
 # Create a virtual environment and install Python dependencies
 RUN python3 -m venv /app/venv
 RUN /app/venv/bin/pip install --no-cache-dir -r /app/requirements.txt
+# RUN /app/venv/bin/python /app/scripts/bitwarden-cli-install.py
 
 # Ensure the entrypoint script has execution permissions
 RUN chmod +x /usr/local/bin/entrypoint.sh
+
+# Expose 80
+EXPOSE 80
+
+# Healthcheck to ensure the container is running
+HEALTHCHECK --interval=30s --timeout=5s --retries=3 CMD curl -fs http://localhost:80/ || exit 1
 
 # Define the entrypoint to run the entrypoint.sh script when the container starts
 ENTRYPOINT [ "/usr/local/bin/entrypoint.sh" ]

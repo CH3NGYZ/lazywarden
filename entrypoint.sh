@@ -3,21 +3,26 @@
 # Load environment variables from the .env file
 source /app/.env
 
+# Run the healthcheck script in the background
+echo "---- Running healthcheck script..."
+/app/venv/bin/python /app/app/healthcheck.py &
+
 # Configure Bitwarden with the provided API URL
+echo "---- Configuring Bitwarden..."
 bw config server "$API_URL"
 
 # Authenticate with Bitwarden
 STATUS="$(bw status | jq -r '.status')"
 if [[ "$STATUS" == "unauthenticated" ]]; then
-  echo "Authenticating with Bitwarden..."
+  echo "---- Authenticating with Bitwarden..."
   bw login --apikey --apikey "$ACCESS_TOKEN"
 fi
 
 # Unlock the vault if configured to do so
 if [[ "$UNLOCK_VAULT" == "true" ]]; then
-  echo "Unlocking the vault..."
+  echo "---- Unlocking the Official Bitwarden vault..."
   export BW_SESSION=$(bw unlock --passwordenv "$BW_PASSWORD" --raw)
-  echo "Vault unlocked!"
+  echo "---- Vault unlocked!"
 fi
 
 # Create the cron log file if it doesn't already exist
@@ -31,7 +36,9 @@ crontab /etc/cron.d/lazywarden-cron
 service cron start
 
 # Run the backup script initially to verify it works
+echo "---- Running initial backup..."
 /app/venv/bin/python /app/app/main.py
 
 # Keep the container running by displaying the cron logs
+echo "---- Cron logs:"
 tail -f /var/log/cron.log

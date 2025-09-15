@@ -108,7 +108,7 @@ def main():
     Main function to load environment variables, configure logging, setup Bitwarden client,
     authenticate client, retrieve secrets, and perform backup.
     """
-    interactive_message()
+    # interactive_message()
 
     # Load environment variables
     try:
